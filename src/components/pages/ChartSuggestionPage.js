@@ -1,42 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { range } from 'd3-array'
-import { theme } from '../../utils'
-import { Box } from '../atoms'
-
-const TextBox = ({ x, y, width, height, children }) => (
-  <g transform={`translate(${x - (width / 2)}, ${y - (height / 2)})`}>
-    <rect width={width} height={height} stroke={theme.color.pink} />
-    <text
-      x={width / 2}
-      y={height / 2}
-      fill={theme.color.black}
-      textAnchor={'middle'}
-      alignmentBaseline={'middle'}
-    >
-      {children}
-    </text>
-  </g>
-)
+import { TextBox } from '../atoms'
+import {
+  ComparisonGroup,
+  RelationshipGroup,
+  DistributionGroup,
+  CompositionGroup
+} from '../composites'
+import { chartGroups } from '../../utils'
 
 class ClassSuggestionPage extends Component {
-  constructor(props) {
-    super(props)
-    this.ref = React.createRef()
-    
-    this.state = {
-      width: null,
-      height: null
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      width: this.ref.current.clientWidth,
-      height: this.ref.current.clientHeight
-    })
-  }
-
   render() {
     const {
       width,
@@ -51,51 +24,26 @@ class ClassSuggestionPage extends Component {
         <svg width={width} height={height} fill={'none'}>
           <rect width={width} height={height} />
           
-          {range(0,8).map((d, i) => (
-            <Box
-              width={rectWidth}
-              height={rectHeight}
-              x={(rectWidth) * (i)}
-              y={0}
-              key={`comparison-${i}`}
-            />))
-          }
-
-          <g transform={`translate(0, ${rectHeight * 2})`}>
-            {range(0,2).map((d, i) => (
-              <Box
-                width={rectWidth}
-                height={rectHeight}
-                x={0}
-                y={rectHeight * i}
-                key={`relationship-${i}`}
-              />
-            ))}
-          </g>
-
-          <g transform={`translate(${rectWidth * 7}, ${rectHeight * 2})`}>
-            {range(0,4).map((d, i) => (
-              <Box
-                width={rectWidth}
-                height={rectHeight}
-                x={0}
-                y={rectHeight * i}
-                key={`distribution-${i}`}
-              />
-            ))}
-          </g>
-
-          <g transform={`translate(0, ${rectHeight * 6})`}>
-            {range(0,7).map((d, i) => (
-              <Box
-                width={rectWidth}
-                height={rectHeight}
-                x={rectWidth * i}
-                y={0}
-                key={`composition-${i}`}
-              />
-            ))}
-          </g>
+          <ComparisonGroup
+            rectWidth={rectWidth}
+            rectHeight={rectHeight}
+            chartGroup={chartGroups.comparison}
+          />
+          <RelationshipGroup
+            rectWidth={rectWidth}
+            rectHeight={rectHeight}
+            chartGroup={chartGroups.relationship}
+          />
+          <DistributionGroup
+            rectWidth={rectWidth}
+            rectHeight={rectHeight}
+            chartGroup={chartGroups.distribution}
+          />
+          <CompositionGroup
+            rectWidth={rectWidth}
+            rectHeight={rectHeight}
+            chartGroup={chartGroups.composition}
+          />
 
           <TextBox
             x={width / 2}

@@ -2,14 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { theme } from '../../../utils'
 
-const Box = ({ x, y, width, height, ...props }) => (
+const Box = ({ x, y, width, height, children, ...props }) => (
   <rect
     x={x}
     y={y}
     width={width}
     height={height}
     {...props}
-  />
+  >
+    {children}
+  </rect>
 )
 
 Box.propTypes = {
