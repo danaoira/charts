@@ -4,6 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
 import combinedReducer from './store/combinedReducer'
 import combinedEpics from './store/combinedEpics'
+import { ChartSuggestionPage } from './components/pages';
 
 const epicMiddleware = createEpicMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -19,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div>Hello world!</div>
+        <ChartSuggestionPage />
       </Provider>
     )
   }
