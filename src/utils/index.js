@@ -1,5 +1,7 @@
 import theme from './theme'
+import { StorySvg } from './storybook'
 
 export {
-  theme
+  theme,
+  StorySvg
 }

@@ -1,19 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { range } from 'd3-array'
 import { theme } from '../../utils'
-
-const Box = ({ x, y, width, height }) => (
-  <rect
-    width={width}
-    height={height}
-    stroke={theme.color.black}
-    x={x}
-    y={y}
-    fill={theme.color.white}
-  />
-)
+import { Box } from '../atoms'
 
 const TextBox = ({ x, y, width, height, children }) => (
   <g transform={`translate(${x - (width / 2)}, ${y - (height / 2)})`}>
